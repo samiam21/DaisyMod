@@ -24,7 +24,7 @@ using namespace daisysp;
  * Knob 1 - Volume Boost
  * Knob 2 - LFO Rate
  * Knob 3 - Width
- * Knob 4 - 
+ * Knob 4 - Delay
  * 
  * LED 1 - 
  * LED 2 - 
@@ -50,10 +50,12 @@ private:
     float boostLevel = 10.0f;
     float rate = 0.0f;
     float width = 0.0f;
+    float delay = 0.0f;
 
     Knob boostKnob;
     Knob rateKnob;
     Knob widthKnob;
+    Knob delayKnob;
 
     Chorus chorus;
 };
