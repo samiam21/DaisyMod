@@ -22,8 +22,8 @@ using namespace daisysp;
  * SPDT 2 - 
  * 
  * Knob 1 - Volume Boost
- * Knob 2 - 
- * Knob 3 - 
+ * Knob 2 - LFO Rate
+ * Knob 3 - Width
  * Knob 4 - 
  * 
  * LED 1 - 
@@ -44,9 +44,16 @@ public:
 private:
     const float boostLevelMin = 10.0f;
     const float boostLevelMax = 30.0f;
+    const float rateMin = 0.0f;
+    const float rateMax = 1.0f;
+
     float boostLevel = 10.0f;
+    float rate = 0.0f;
+    float width = 0.0f;
 
     Knob boostKnob;
+    Knob rateKnob;
+    Knob widthKnob;
 
     Chorus chorus;
 };

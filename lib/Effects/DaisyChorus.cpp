@@ -6,13 +6,15 @@ void DaisyChorus::Setup(daisy::DaisySeed *hardware)
 
     // Initialize the knobs
     boostKnob.Init(hw, KNOB_1_CHN, boostLevel, boostLevelMin, boostLevelMax);
+    rateKnob.Init(hw, KNOB_2_CHN, rate, rateMin, rateMax);
+    widthKnob.Init(hw, KNOB_3_CHN, width);
 
     // Initialize the Chorus
     float sample_rate = hw->AudioSampleRate();
     chorus.Init(sample_rate);
-    chorus.SetLfoFreq(.33f, .2f);
-    chorus.SetLfoDepth(1.f, 1.f);
-    chorus.SetDelay(.75f, .9f);
+    chorus.SetLfoFreq(rate);
+    chorus.SetLfoDepth(width);
+    chorus.SetDelay(.75f);
 }
 
 void DaisyChorus::AudioCallback(float **in, float **out, size_t size)
@@ -42,6 +44,22 @@ void DaisyChorus::Loop()
     if (boostKnob.SetNewValue(boostLevel))
     {
         debugPrintlnF(hw, "Updated the boost level to: %f", boostLevel);
+    }
+
+    // Knob 2 controls the LFO rate
+    if (rateKnob.SetNewValue(rate))
+    {
+        chorus.SetLfoFreq(rate);
+
+        debugPrintlnF(hw, "Updated the rate to: %f", rate);
+    }
+
+    // Knob 3 controls the LFO width
+    if (widthKnob.SetNewValue(width))
+    {
+        chorus.SetLfoDepth(width);
+
+        debugPrintlnF(hw, "Updated the width to: %f", width);
     }
 }
 
