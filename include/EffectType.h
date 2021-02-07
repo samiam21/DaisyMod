@@ -4,10 +4,14 @@
 #include "IEffect.h"
 #include "../lib/Effects/SimpleBypass.h"
 #include "../lib/Effects/DaisyChorus.h"
+#include "../lib/Effects/DaisyFlanger.h"
+#include "../lib/Effects/DaisyTremolo.h"
 
 // Effect Objects
 SimpleBypass simpleBypass;
 DaisyChorus chorus;
+DaisyFlanger flanger;
+DaisyTremolo tremolo;
 
 /**
  * The rotary encoder is using Gray code, not standard hex.
@@ -18,6 +22,8 @@ enum EffectType
 {
     SIMPLEBYPASS = 0,
     DAISYCHORUS = 1,
+    DAISYFLANGER = 3,
+    DAISYTREMOLO = 2,
 
     UNSET = 99
 };
@@ -31,6 +37,10 @@ extern IEffect *GetEffectObject(EffectType type)
     {
     case DAISYCHORUS:
         return (IEffect *)&chorus;
+    case DAISYFLANGER:
+        return (IEffect *)&flanger;
+    case DAISYTREMOLO:
+        return (IEffect *)&tremolo;
     case SIMPLEBYPASS:
     case UNSET:
     default:
